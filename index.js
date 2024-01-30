@@ -5,11 +5,17 @@ const pets = require('./data');
 const express = require('express');
 const app = express();
 
+// init path package
+const path = require('path')
+
 const PORT = 8080;
 
 // GET - / - returns homepage
 app.get('/', (req, res) => {
     // serve up the public folder as static index.html file
+    // outside of function, store path package in variable
+    // use res.sendFile to link '/' to index.html
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 
 });
 
@@ -21,19 +27,21 @@ app.get('/api', (req, res) => {
 // get all pets from the database
 app.get('/api/v1/pets', (req, res) => {
     // send the pets array as a response
-
+    res.json(pets);
 });
 
 // get pet by owner with query string
 app.get('/api/v1/pets/owner', (req, res) => {
     // get the owner from the request
+    // declare owner variable to store owner input value
+    // use req.query to query for that owner value
+    const owner = req.query.owner;
 
-
-    // find the pet in the pets array
+    // find the pet that matches the queried owner in the pets array
     const pet = pets.find(pet => pet.owner === owner);
 
     // send the pet as a response
-
+    res.json(pet);
 });
 
 // get pet by name
