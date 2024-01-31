@@ -47,12 +47,14 @@ app.get('/api/v1/pets/owner', (req, res) => {
 // get pet by name
 app.get('/api/v1/pets/:name', (req, res) => {
     // get the name from the request
-
-
+    // declare variable for request for input name
+    const petName = req.params.name;
+    console.log(petName);
     // find the pet in the pets array
-    const pet = pets.find(pet => pet.name === name);
+    // const pet = pets.find(pet => pet.name === name);
 
-    // send the pet as a response
+    // // send the pet as a response
+    // res.json(pet);
 
 });
 
